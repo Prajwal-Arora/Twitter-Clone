@@ -1,0 +1,19 @@
+{
+  "name": "twitter-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prajwal-Arora/Twitter-Clone.git"
+  },
+  "author": "Prajwal Arora",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Prajwal-Arora/Twitter-Clone/issues"
+  },
+  "homepage": "https://github.com/Prajwal-Arora/Twitter-Clone#readme"
+}
