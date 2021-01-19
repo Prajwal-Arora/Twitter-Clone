@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Prajwal-Arora/Twitter-Clone/issues"
   },
-  "homepage": "https://github.com/Prajwal-Arora/Twitter-Clone#readme"
+  "homepage": "https://github.com/Prajwal-Arora/Twitter-Clone#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^3.0.0"
+  }
 }
