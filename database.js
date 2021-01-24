@@ -9,7 +9,7 @@ class Database {
     }
 
     connect() {
-        mongoose.connect('mongodb+srv://admin:admin@tc0.ppf3d.mongodb.net/tcdb?retryWrites=true&w=majority')
+        mongoose.connect('mongodb+srv://admin:<password>@tc0.ppf3d.mongodb.net/<db-name>?retryWrites=true&w=majority')
         .then(() => {
             console.log("database connection successful");
         })
