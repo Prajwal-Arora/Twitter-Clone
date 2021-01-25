@@ -9,9 +9,10 @@ const PostSchema = new Schema({
     },
     postedBy: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
-        pinned: Boolean
-    }
+        ref: 'User'
+    },
+        pinned: Boolean,
+        likes: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 }, {
     timestamps: true
 });
