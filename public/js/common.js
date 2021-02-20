@@ -1,8 +1,10 @@
-$("#postTextarea").keyup(event => {
+$("#postTextarea, #replyTextarea").keyup(event => {
     var textbox = $(event.target);
     var value = textbox.val().trim();
+
+    var isModal = textbox.parents(".modal").length == 1;
     
-    var submitButton = $("#submitPostButton");
+    var submitButton = isModal ? $("#submitReplyButton") : $("#submitPostButton");
 
     if(submitButton.length == 0) return alert("No submit button found");
 
@@ -28,6 +30,15 @@ $("#submitPostButton").click(event => {
         $(".postsContainer").prepend(html);
         textbox.val("");
         button.prop("disabled", true);
+    })
+})
+
+$("#replyModal").on("show.bs.modal", (event) => {
+    var button = $(event.relatedTarget);
+    var postId = getPostIdFromElement(button);
+
+    $.get(`/api/posts/${postId}`, results => {
+        outputPosts(results, )
     })
 })
 
@@ -88,6 +99,12 @@ function getPostIdFromElement(element) {
 }
 
 function createPostHtml(postData) {
+
+    if(postData == null) return alert("Post object is null");
+
+    var isRetweet = postData.retweetData !== undefined;
+    var retweetedBy = isRetweet ? postData.postedBy.username : null;
+    postData = isRetweet ? postData.retweetData : postData;
     
     var postedBy = postData.postedBy;
 
@@ -101,8 +118,18 @@ function createPostHtml(postData) {
     var likeButtonActiveClass = postData.likes.includes(userLoggedIn._id) ? "active" : "";
     var retweetButtonActiveClass = postData.retweetUsers.includes(userLoggedIn._id) ? "active" : "";
 
-    return `<div class='post' data-id='${postData._id}'>
+    var retweetText = '';
+    if(isRetweet) {
+        retweetText = `<span>
+                        <i class='fas fa-retweet'></i>
+                        Retweeted by <a href='/profile/${retweetedBy}'>@${retweetedBy}</a>
+                        </span>`
+    }
 
+    return `<div class='post' data-id='${postData._id}'>
+                <div class='postActionContainer'>
+                ${retweetText}
+                </div>
                 <div class='mainContentContainer'>
                     <div class='userImageContainer'>
                         <img src='${postedBy.profilePic}'>
@@ -118,7 +145,7 @@ function createPostHtml(postData) {
                         </div>
                         <div class='postFooter'>
                             <div class='postButtonContainer'>
-                                <button>
+                                <button data-toggle='modal' data-target='#replyModal'>
                                     <i class='far fa-comment'></i>
                                 </button>
                             </div>
@@ -174,5 +201,18 @@ function timeDifference(current, previous) {
 
     else {
         return Math.round(elapsed/msPerYear ) + ' years ago';   
+    }
+}
+
+function outputPosts(results, container) {
+    container.html("");
+
+    results.forEach(result => {
+        var html = createPostHtml(result)
+        container.append(html);
+    });
+
+    if(results.length == 0) {
+        container.append("<span class='noResults'>Nothing to show!</span>")
     }
 }
