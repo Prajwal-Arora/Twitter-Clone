@@ -16,7 +16,7 @@ $("#postTextarea, #replyTextarea").keyup(event => {
     submitButton.prop("disabled", false);
 })
 
-$("#submitPostButton, #submitReplyButton").click(() => {
+$("#submitPostButton, #submitReplyButton").click((event) => {
     var button = $(event.target);
 
     var isModal = button.parents(".modal").length == 1;
