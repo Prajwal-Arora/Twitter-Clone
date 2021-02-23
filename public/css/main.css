@@ -152,6 +152,11 @@ button span {
     flex-shrink: 0;
 }
 
+.post.largeFont .postBody,
+.post.largeFont .postFooter {
+    font-size: 21px;
+}
+
 .mainContentContainer {
     flex: 1;
     display: flex;
@@ -233,4 +238,12 @@ button span {
 
 .replyFlag a {
     color: var(--blue);
+}
+
+.postContentContainer .header {
+    display: flex;
+}
+
+.postContentContainer .header .date {
+    flex: 1;
 }
