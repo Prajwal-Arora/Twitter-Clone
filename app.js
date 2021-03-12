@@ -30,6 +30,7 @@ const profileRoute = require('./routes/profileRoutes');
 
 // Api routes
 const postsApiRoute = require('./routes/api/posts');
+const usersApiRoute = require('./routes/api/users');
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
@@ -38,6 +39,7 @@ app.use("/posts", middleware.requirelogin, postRoute);
 app.use("/profile", middleware.requirelogin, profileRoute);
 
 app.use("/api/posts", postsApiRoute);
+app.use("/api/users", usersApiRoute);
 
 app.get("/", middleware.requirelogin, (req, res, next) => {
 

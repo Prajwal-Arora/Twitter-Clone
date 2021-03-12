@@ -26,7 +26,8 @@ router.post("/", async (req, res, next) => {
                 { email: req.body.logUsername }
             ]
         })
-        .catch((err) => {
+        .catch((error) => {
+            console.log(error);
             payload.errorMessage = "Something went wrong!";
             res.status(200).render("login", payload);
         });
@@ -41,7 +42,7 @@ router.post("/", async (req, res, next) => {
         }
 
         payload.errorMessage = "Login credentials incorrect!";
-        res.status(200).render("login", payload);
+        return res.status(200).render("login", payload);
     }
 
     payload.errorMessage = "Make sure each field has a valid value!";
