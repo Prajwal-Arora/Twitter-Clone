@@ -5,4 +5,4 @@ exports.requirelogin = (req, res, next) => {
     else {
         return res.redirect('/login');
     }
-}
+}}
