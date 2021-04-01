@@ -22,7 +22,13 @@ router.post("/", async (req, res, next) => {
     };
 
     Message.create(newMessage)
-    .then(message => {
+    .then(async message => {
+        message = await message.populate("sender").execPopulate();
+        message = await message.populate("chat").execPopulate();
+
+        Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message })
+        .catch(error => console.log(error));
+
         res.status(201).send(message);
     })
     .catch(error => {
