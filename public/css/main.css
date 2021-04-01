@@ -20,6 +20,10 @@ html, body {
     font-weight: 300;
 }
 
+ul {
+    margin: 0;
+}
+
 * {
     outline: none !important;
 }
@@ -662,6 +666,19 @@ button span {
     padding: 6px 12px;
     border-radius: 18px;
     font-size: 14px;
+}
+
+.typingDots img {
+    background-color: transparent;
+    padding: 6px 12px;
+    border-radius: 18px;
+    height: 48px;
+}
+
+.typingDots {
+    padding: var(--spacing);
+    padding-bottom: 0;
+    display: none;
 }
 
 .chatMessages .message .messageContainer {

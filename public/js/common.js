@@ -586,3 +586,12 @@ function getOtherChatUsers(users) {
 
     return users.filter(user => user._id != userLoggedIn._id);
 }
+
+function messageRecieved(newMessage) {
+    if($(".chatContainer").length == 0) {
+        // popup notification
+    }
+    else {
+        addChatMessageHtml(newMessage)
+    }
+}
